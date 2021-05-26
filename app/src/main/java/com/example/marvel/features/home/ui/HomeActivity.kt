@@ -11,6 +11,9 @@ import javax.inject.Inject
 class HomeActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var homeViewModel: HomeViewModel
+
+    @Inject
     lateinit var charactersAdapter: CharactersAdapter
 
     private lateinit var binding: ActivityHomeBinding
@@ -26,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
     private fun initUI() {
         initRecycler()
         initListeners()
+        setUpObservers()
     }
 
     private fun initRecycler() {
@@ -36,6 +40,24 @@ class HomeActivity : AppCompatActivity() {
     private fun initListeners() {
         charactersAdapter.clickListener = {
             //TODO show character detail
+        }
+    }
+
+    private fun setUpObservers() {
+        homeViewModel.charactersFetched.observe(this) { result ->
+
+            result.doIfSuccess {
+                //TODO show items
+            }
+
+            result.doIfFailure {
+                //TODO manage error
+            }
+
+            result.doIfInProgress {
+                //TODO show loading
+            }
+
         }
     }
 }
