@@ -56,6 +56,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.28.3-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
 
+    // Retrofit OkHttp
     // Required for local unit tests
     testImplementation("junit:junit:4.13.2")
 
