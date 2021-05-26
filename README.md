@@ -9,6 +9,9 @@ This app uses [Marvel API](https://developer.marvel.com) with MVVM
 	* Release
 *`Libraries`
     * Dagger with hilt component: simplify dagger di
+    * Retrofit: make http calls
+    * Http loggin interceptor: log calls & responses
+    * Moshi: json converter
 
 ## Run Requirements
 * Android 8+
