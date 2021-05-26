@@ -12,6 +12,7 @@ This app uses [Marvel API](https://developer.marvel.com) with MVVM
     * Retrofit: make http calls
     * Http loggin interceptor: log calls & responses
     * Moshi: json converter
+    *Glide: image loader
 
 ## Run Requirements
 * Android 8+
