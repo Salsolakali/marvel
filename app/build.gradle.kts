@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -22,8 +23,11 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled (false)
-            proguardFiles (getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
+            minifyEnabled(false)
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -44,8 +48,13 @@ dependencies {
     // Support
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.3.0")
+
     // ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+
+    // Dagger
+    implementation("com.google.dagger:hilt-android:2.28.3-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
 
     // Required for local unit tests
     testImplementation("junit:junit:4.13.2")
