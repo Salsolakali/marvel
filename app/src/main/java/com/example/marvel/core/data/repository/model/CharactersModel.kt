@@ -7,10 +7,15 @@ data class CharacterApi(
     val name: String,
     val description: String?,
     val thumbnail: Image,
-    val images: List<Image>
+    val resourceURI: String?
 ) {
     fun toDomain(): Character {
-        return Character(name)
+        return Character(
+            id = id,
+            name = name,
+            description = description ?: "No description available",
+            image = "${thumbnail.path}.${thumbnail.extension}"
+        )
     }
 }
 
@@ -25,7 +30,7 @@ data class DataContainer<out T>(
 data class DataWrapper<out T>(
     val code: Int,
     val status: String,
-    val copyRight: String,
+    val copyright: String,
     val attributionText: String,
     val attributionHTML: String,
     val etag: String,

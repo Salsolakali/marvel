@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
 import com.example.marvel.core.extensions.inflate
+import com.example.marvel.core.extensions.loadFromUrl
 import com.example.marvel.features.home.domain.model.Character
+import kotlinx.android.synthetic.main.item_character.view.*
 import kotlin.properties.Delegates
 
 class CharactersAdapter
@@ -27,7 +29,10 @@ class CharactersAdapter
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(characterView: Character, clickListener: (Character) -> Unit) {
-            //TODO populate view
+            itemView.imgCharacter.loadFromUrl(characterView.image)
+            itemView.tvName.text = characterView.name
+            itemView.tvDescription.text = characterView.description
+            itemView.setOnClickListener { clickListener(characterView) }
         }
     }
 }
