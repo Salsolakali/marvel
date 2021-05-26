@@ -3,6 +3,7 @@ package com.example.marvel.core.di
 import android.app.Application
 import android.content.Context
 import com.example.marvel.R
+import com.example.marvel.features.home.ui.CharactersAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,10 @@ class AppModule {
     @Named(nameApp)
     fun provideNameApp(context: Context): String {
         return context.getString(R.string.app_name)
+    }
+
+    @Provides
+    fun providesAdapter(): CharactersAdapter {
+        return CharactersAdapter()
     }
 }
