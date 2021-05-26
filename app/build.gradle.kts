@@ -52,7 +52,7 @@ android {
 
     productFlavors {
         create("pro") {
-            buildConfigField("String", "HOST", "\"https://gateway.marvel.com/V1/\"")
+            buildConfigField("String", "HOST", "\"https://gateway.marvel.com/v1/public/\"")
             buildConfigField("String", "PUBLIC_KEY", project.property("PUBLIC_KEY") as String)
             buildConfigField("String", "PRIVATE_KEY", project.property("PRIVATE_KEY") as String)
         }
