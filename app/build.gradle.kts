@@ -11,7 +11,9 @@ android {
     compileSdkVersion(30)
     buildToolsVersion("30.0.3")
     flavorDimensions("default")
-
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.marvel"
         minSdkVersion(26)
