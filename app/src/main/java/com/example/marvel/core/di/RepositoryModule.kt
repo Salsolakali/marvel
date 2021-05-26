@@ -1,6 +1,8 @@
 package com.example.marvel.core.di
 
+import com.example.marvel.core.data.repository.APIService
 import com.example.marvel.core.data.repository.DataRepository
+import com.example.marvel.core.hashGenerator.HashGenerator
 import com.example.marvel.features.home.data.DataRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -13,7 +15,7 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Provides
     @Singleton
-    fun providesRepository(): DataRepository {
-        return DataRepositoryImpl()
+    fun providesRepository(apiService: APIService, hashGenerator: HashGenerator): DataRepository {
+        return DataRepositoryImpl(apiService, hashGenerator)
     }
 }
