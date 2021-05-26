@@ -10,6 +10,7 @@ plugins {
 android {
     compileSdkVersion(30)
     buildToolsVersion("30.0.3")
+    flavorDimensions("default")
 
     defaultConfig {
         applicationId = "com.example.marvel"
@@ -21,15 +22,41 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+        }
+        getByName("debug") {}
+    }
+
     buildTypes {
         getByName("release") {
-            minifyEnabled(false)
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            buildConfigField(
+                "okhttp3.logging.HttpLoggingInterceptor.Level",
+                "LEVEL_LOGS",
+                "okhttp3.logging.HttpLoggingInterceptor.Level.NONE"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        getByName("debug") {
+            buildConfigField(
+                "okhttp3.logging.HttpLoggingInterceptor.Level",
+                "LEVEL_LOGS",
+                "okhttp3.logging.HttpLoggingInterceptor.Level.BODY"
             )
         }
     }
+
+    productFlavors {
+        create("pro") {
+            buildConfigField("String", "HOST", "\"https://gateway.marvel.com/V1/\"")
+            buildConfigField("String", "PUBLIC_KEY", project.property("PUBLIC_KEY") as String)
+            buildConfigField("String", "PRIVATE_KEY", project.property("PRIVATE_KEY") as String)
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -57,6 +84,13 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
 
     // Retrofit OkHttp
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.6.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.9.3")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
     // Required for local unit tests
     testImplementation("junit:junit:4.13.2")
 
