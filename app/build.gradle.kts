@@ -107,4 +107,12 @@ dependencies {
     // Required for local unit tests
     testImplementation("junit:junit:4.13.2")
 
+    // Test mockito
+    testImplementation("org.mockito:mockito-core:3.7.7")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    // Test MockWebServer
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
+    // Test Turbine
+    testImplementation("app.cash.turbine:turbine:0.4.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
 }
