@@ -7,6 +7,8 @@ This app uses [Marvel API](https://developer.marvel.com) with MVVM
 * `Build types` Two build types supported:
 	* Develop
 	* Release
+*`Libraries`
+    * Dagger with hilt component: simplify dagger di
 
 ## Run Requirements
 * Android 8+
