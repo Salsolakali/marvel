@@ -1,8 +1,16 @@
 package com.example.marvel.features.home.ui
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.marvel.R
+import com.example.marvel.core.domain.RequestFailure
+import com.example.marvel.core.extensions.doIfFailure
+import com.example.marvel.core.extensions.doIfInProgress
+import com.example.marvel.core.extensions.doIfSuccess
 import com.example.marvel.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,6 +38,7 @@ class HomeActivity : AppCompatActivity() {
         initRecycler()
         initListeners()
         setUpObservers()
+        homeViewModel.fetchCharacters()
     }
 
     private fun initRecycler() {
@@ -46,18 +55,39 @@ class HomeActivity : AppCompatActivity() {
     private fun setUpObservers() {
         homeViewModel.charactersFetched.observe(this) { result ->
 
-            result.doIfSuccess {
-                //TODO show items
+            result.doIfSuccess { items ->
+                hideLoading()
+                charactersAdapter.collection = items
             }
 
             result.doIfFailure {
-                //TODO manage error
+                hideLoading()
+                manageError(it)
             }
 
             result.doIfInProgress {
-                //TODO show loading
+                showLoading()
             }
 
+        }
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun manageError(requestFailure: RequestFailure) {
+        val message = when (requestFailure) {
+            is RequestFailure.ApiError -> requestFailure.message
+            is RequestFailure.NoConnectionError -> getString(R.string.connection_error_message)
+            else -> getString(R.string.default_error_message)
+        }
+        if (message.isNullOrEmpty()) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -1,4 +1,3 @@
 package com.example.marvel.features.home.domain.model
 
-class Character {
-}
+data class Character (val name: String)

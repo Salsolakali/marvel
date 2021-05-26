@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvel.R
 import com.example.marvel.core.extensions.inflate
+import com.example.marvel.features.home.domain.model.Character
 import kotlin.properties.Delegates
 
 class CharactersAdapter
