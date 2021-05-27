@@ -11,7 +11,9 @@ import com.example.marvel.core.domain.RequestFailure
 import com.example.marvel.core.extensions.doIfFailure
 import com.example.marvel.core.extensions.doIfInProgress
 import com.example.marvel.core.extensions.doIfSuccess
+import com.example.marvel.core.presentation.Navigator
 import com.example.marvel.databinding.ActivityHomeBinding
+import com.example.marvel.features.detail.ui.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,6 +25,9 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var charactersAdapter: CharactersAdapter
+
+    @Inject
+    lateinit var navigator: Navigator
 
     private lateinit var binding: ActivityHomeBinding
 
@@ -48,7 +53,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initListeners() {
         charactersAdapter.clickListener = {
-            //TODO show character detail
+            var bundle = Bundle().apply {
+                putSerializable(DetailActivity.CHARACTER_KEY, it)}
+                navigator.navigateToDetail(this, bundle, this)
         }
     }
 
