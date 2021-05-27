@@ -24,3 +24,10 @@ PUBLIC_KEY = "yourPublicApiKey"
 PRIVATE_KEY = "yourPrivateApiKey"
 
 Sync project with gradle files, cross your fingers and start enjoying marvel world!
+
+## Releases
+* v1.0.0 : includes basic functionality acording to initial requirements
+
+-> Comming soon!
+* v1.1.0 : add paginated search to have all characters (not only first 20) + bug fixing
+* v1.2.0 : add searchview to filter characters by name + bug fixing
